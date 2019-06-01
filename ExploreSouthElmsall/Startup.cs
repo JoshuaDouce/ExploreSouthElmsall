@@ -26,6 +26,8 @@ namespace ExploreSouthElmsall
             services.AddTransient(x => 
             new FeatureToggles {
                 EnableDeveloperExceptions = _configuration.GetValue<bool>("FeatureToggles:EnableDeveloperExceptions") });
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +39,13 @@ namespace ExploreSouthElmsall
             {
                 app.UseDeveloperExceptionPage();
             }
+
+
+            //Default route = home/index/id but id is optional
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                    "Default", "{controller=Home}/{action=Index}/{id?}");
+            });
 
             app.UseFileServer();
         }
