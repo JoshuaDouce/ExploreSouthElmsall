@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Explore South Elmsall</title>
+</head>
+<body>
+    <header>Header</header>
+    <h1>Explore South Elmsall</h1>
+
+    @RenderBody()
+
+<section id="action">
+    @if (IsSectionDefined("action"))
+    {
+        @RenderSection("action", false)
+    }
+    else {
+        <p>Default content no section defined</p>
+    }
+
+</section>
+
+    <footer>
+        <p>
+            Copyright Joshua Douce @DateTime.Now
+        </p>
+    </footer>
+</body>
+</html>

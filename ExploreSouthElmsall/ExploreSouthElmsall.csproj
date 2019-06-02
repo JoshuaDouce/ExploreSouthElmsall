@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Blog\index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Blog\index.cshtml" />
+    <None Include="Views\Home\index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />

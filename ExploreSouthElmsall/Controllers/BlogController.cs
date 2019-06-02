@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExploreSouthElmsall.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExploreSouthElmsall.Controllers
@@ -11,13 +12,21 @@ namespace ExploreSouthElmsall.Controllers
     {
         public IActionResult Index()
         {
-            return new ContentResult { Content = "Blog Posts" };
+            return View();
         }
 
         [Route("{year:int}/{month:range(1,12)}/{key}")]
         public IActionResult Post(int year, int month, string key)
         {
-            return new ContentResult { Content = $"Year: {year}; Month: {month}; Key: {key}" };
+            var post = new BlogPost
+            {
+                Title = "My Blog Post",
+                Posted = DateTime.Now,
+                Author = "Joshua Douce",
+                Body = "What a great blog post"
+            };
+
+            return View(post);
         }
     }
 }

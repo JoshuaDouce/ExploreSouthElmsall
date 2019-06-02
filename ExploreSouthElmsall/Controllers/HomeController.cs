@@ -13,7 +13,7 @@ namespace ExploreSouthElmsall.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return new ContentResult { Content = "Home"};
+            return View();
         }
     }
 }
