@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ExploreSouthElmsall.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -26,6 +28,11 @@ namespace ExploreSouthElmsall
             services.AddTransient(x => 
             new FeatureToggles {
                 EnableDeveloperExceptions = _configuration.GetValue<bool>("FeatureToggles:EnableDeveloperExceptions") });
+
+            services.AddDbContext<BlogDataContext>(options => {
+                var conString = _configuration.GetConnectionString("BlogDataContext");
+                options.UseSqlServer(conString);
+            });
 
             services.AddMvc();
         }

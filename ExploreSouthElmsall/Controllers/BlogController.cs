@@ -10,6 +10,13 @@ namespace ExploreSouthElmsall.Controllers
     [Route("blog")]
     public class BlogController : Controller
     {
+        private readonly BlogDataContext _dbContext;
+
+        public BlogController(BlogDataContext context)
+        {
+            _dbContext = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -44,6 +51,9 @@ namespace ExploreSouthElmsall.Controllers
 
             post.Author = User.Identity.Name;
             post.Posted = DateTime.Now;
+
+            _dbContext.Add(post);
+            _dbContext.SaveChanges();
 
             return View();
         }
