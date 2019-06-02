@@ -1,0 +1,13 @@
+﻿@inject ExploreSouthElmsall.Models.FormattingService Format 
+@model ExploreSouthElmsall.Models.BlogPost
+
+<div>
+    <article>
+        <h1>
+            @Html.ActionLink(Model.Title, "Post", "Blog", new { year = Model.Posted.Year, month = Model.Posted.Month, key = Model.Key })
+        </h1>
+        <p>@Model.Author</p>
+        <p>@Model.Body</p>
+        <p>@Format.AsReadableDate(Model.Posted)</p>
+    </article>
+</div>

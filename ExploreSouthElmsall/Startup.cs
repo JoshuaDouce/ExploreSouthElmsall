@@ -34,6 +34,8 @@ namespace ExploreSouthElmsall
                 options.UseSqlServer(conString);
             });
 
+            services.AddSingleton<FormattingService>();
+
             services.AddMvc();
         }
 

@@ -4,9 +4,4 @@
     Layout = "_Layout";
 }
 
-<div>
-    <h1>@Model.Title</h1>
-    <p>@Model.Author</p>
-    <p>@Model.Posted</p>
-    <p>@Model.Body</p>
-</div>
+@await Html.PartialAsync("_post")
