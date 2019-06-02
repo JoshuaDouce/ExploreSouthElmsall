@@ -28,5 +28,24 @@ namespace ExploreSouthElmsall.Controllers
 
             return View(post);
         }
+
+        [Route("create")]
+        public IActionResult Create() {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("create")]
+        public IActionResult Create([Bind("Title", "Body")]BlogPost post)
+        {
+            if (!ModelState.IsValid) {
+                return View();
+            }
+
+            post.Author = User.Identity.Name;
+            post.Posted = DateTime.Now;
+
+            return View();
+        }
     }
 }
