@@ -6,6 +6,7 @@ using ExploreSouthElmsall.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +35,15 @@ namespace ExploreSouthElmsall
                 options.UseSqlServer(conString);
             });
 
+            services.AddDbContext<IdentityDataContext>(options => {
+                var conString = _configuration.GetConnectionString("IdentityDataContext");
+                options.UseSqlServer(conString);
+            });
+
             services.AddSingleton<FormattingService>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDataContext>();
 
             services.AddMvc();
         }
@@ -52,6 +61,7 @@ namespace ExploreSouthElmsall
                 app.UseExceptionHandler("/error.html");
             }
 
+            app.UseIdentity();
 
             //Default route = home/index/id but id is optional
             app.UseMvc(routes => {

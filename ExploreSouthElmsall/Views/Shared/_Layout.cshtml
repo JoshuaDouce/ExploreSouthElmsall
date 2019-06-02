@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Explore South Elmsall</title>
-    <link rel="stylesheet" type="text/css" href="~/css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/main.css" />
 </head>
 <body>
     <header>Header</header>
@@ -11,16 +11,35 @@
 
     @RenderBody()
 
-<section id="action">
-    @if (IsSectionDefined("action"))
-    {
-        @RenderSection("action", false)
-    }
-    else {
-        <p>Default content no section defined</p>
-    }
+    <section id="action">
+        @if (IsSectionDefined("action"))
+        {
+            @RenderSection("action", false)
+        }
+        else
+        {
+            <p>Default content no section defined</p>
+        }
 
-</section>
+    </section>
+
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form id="logout" action="@Url.Action("Logout", "Account")" method="POST">
+                <a href="javascript: $('#logout').submit()" class="last">
+                    Logout
+                    <br /><span class="tagline">@User.Identity.Name</span>
+                </a>
+            </form>
+        }
+        else
+        {
+            <a href="@Url.Action("Login", "Account")" title="log in" class="last">
+                Login
+            </a>
+        }
+    </div>
 
     <footer>
         <p>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ExploreSouthElmsall.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExploreSouthElmsall.Controllers
@@ -36,11 +37,13 @@ namespace ExploreSouthElmsall.Controllers
         }
 
         [Route("create")]
+        [Authorize]
         public IActionResult Create() {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         [Route("create")]
         public IActionResult Create([Bind("Title", "Body")]BlogPost post)
         {
