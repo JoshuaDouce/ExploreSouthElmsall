@@ -19,19 +19,18 @@ namespace ExploreSouthElmsall.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var posts = _dbContext.Posts.
+                OrderByDescending(x => x.Posted)
+                .Take(5)
+                .ToArray();
+
+            return View(posts);
         }
 
         [Route("{year:int}/{month:range(1,12)}/{key}")]
         public IActionResult Post(int year, int month, string key)
         {
-            var post = new BlogPost
-            {
-                Title = "My Blog Post",
-                Posted = DateTime.Now,
-                Author = "Joshua Douce",
-                Body = "What a great blog post"
-            };
+            var post = _dbContext.Posts.FirstOrDefault(X => X.Key == key);
 
             return View(post);
         }
@@ -55,7 +54,11 @@ namespace ExploreSouthElmsall.Controllers
             _dbContext.Add(post);
             _dbContext.SaveChanges();
 
-            return View();
+            return RedirectToAction("Post", "Blog", new {
+                year = post.Posted.Year,
+                month = post.Posted.Month,
+                key = post.Key
+            });
         }
     }
 }

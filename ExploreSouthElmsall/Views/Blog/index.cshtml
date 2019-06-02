@@ -1,5 +1,19 @@
-﻿@{
+﻿@model  IEnumerable<ExploreSouthElmsall.Models.BlogPost>
+
+@{
     Layout = "_Layout";
 }
 
 <p>Blog Posts will go here!</p>
+
+@foreach (var post in Model)
+{
+    <article>
+        <h1>
+            @Html.ActionLink(post.Title, "Post", "Blog", new {year=post.Posted.Year, month=post.Posted.Month, key = post.Key })
+        </h1>
+        <p>@post.Author</p>
+        <p>@post.Body</p>
+        <p>@post.Posted</p>
+    </article>
+}

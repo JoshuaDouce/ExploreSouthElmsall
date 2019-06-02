@@ -11,7 +11,7 @@ namespace ExploreSouthElmsall.Models
     {
         public long Id { get; set; }
         private string _key;
-        public string key {
+        public string Key {
             get {
                 if (_key == null)
                 {
@@ -19,6 +19,7 @@ namespace ExploreSouthElmsall.Models
                 }
                 return _key;
             }
+            set { _key = value; }
         }
         [Display(Name = "Post Title")]
         [DataType(DataType.Text)]
